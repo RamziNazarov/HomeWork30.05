@@ -1,0 +1,70 @@
+﻿@{
+    List<Category> categories = ViewBag.Categories;
+    List<Product> products = ViewBag.Products;
+    @if (products != null && categories != null)
+    {
+        <table class="table-bordered table-hover table-striped table">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Product name</td>
+                    <td>Product price</td>
+                    <td>Product category</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (products.Count > 0)
+                {
+                    foreach (var item in products)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.ProductName</td>
+                            <td>@item.ProductPrice</td>
+                            <td>@categories.Where(p => p.Id == item.CategoryId).Select(p => p.CategoryName).FirstOrDefault()</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr class="text-center">
+                        <td colspan="4">Empty</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <form action="/Product/ProductChange" method="post">
+            <div class="input-group row col-md-4">
+                <label for="Id">Product: </label>
+                <select class="form-control" id="Id" name="Id" style="position:relative;left:20px;">
+                    @foreach (var product in products)
+                    { 
+                        <option value="@product.Id">@string.Join(" | ",product.ProductName, product.ProductPrice,categories.Where(c=>c.Id == product.CategoryId).Select(p=>p.CategoryName).FirstOrDefault())</option>
+                    }
+                </select>
+            </div>
+            <br />
+            <div class="row col-md-4 input-group">
+                <label for="CategoryId">Category: </label>
+                <select style="position:relative;left:20px;" id="CategoryId" class="form-control" name="CategoryId">
+                    @foreach(var category in categories)
+                    { 
+                        <option value="@category.Id">@category.CategoryName</option>
+                    }
+                </select>
+            </div>
+            <br />
+            <div class="row col-md-4 input-group">
+                <label for="ProductName">Product name: </label>
+                <input class="form-control" style="position:relative;left:20px;" id="ProductName" type="text" name="ProductName" placeholder="Write new product name"/>
+            </div>
+            <br />
+            <div class="row col-md-4 input-group">
+                <label for="ProductPrice">Product price: </label>
+                <input class="form-control" style="position:relative;left:20px;" id="ProductPrice" type="number" name="ProductPrice" placeholder="Write new product price"/>
+            </div>
+            <br />
+            <input type="submit" class="btn btn-primary input-group row col-md-2" value="Edit" />
+        </form>
+    }
+}

@@ -1,0 +1,26 @@
+﻿@{
+    List<Category> categories = ViewBag.Categories;
+<form action="/Product/AddProduct" method="post">
+    <div class="row input-group col-md-4">
+        <label for="ProductName">Product name: </label>
+        <input class="form-control" style="position:relative; left:20px;" id="ProductName" type="text" name="ProductName" placeholder="Write product name" />
+    </div>
+    <br/>
+    <div class="row input-group col-md-4">
+        <label for="ProductPrice">Product price: </label>
+        <input class="form-control" style="position:relative; left:20px;" id="ProductPrice" type="number" name="ProductPrice" placeholder="Write product price" />
+    </div>
+    <br/>
+    <div class="row input-group col-md-4 ">
+        <label for="CategoryId">Category: </label>
+        <select class="form-control" style="position:relative;left:20px;" id="CategoryId" name="CategoryId">
+            @foreach (var item in categories)
+            { 
+                <option value="@item.Id">@item.CategoryName</option>
+            }
+        </select>
+    </div>
+    <br />
+    <input class="row input-group col-md-2 btn btn-primary" type="submit" value="Add" />
+</form>
+}
