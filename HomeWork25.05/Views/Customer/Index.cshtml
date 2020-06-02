@@ -1,0 +1,57 @@
+@{
+    List<Category> categories = ViewBag.Categories;
+    List<Product> products = ViewBag.Products;
+    @if(products != null && categories != null)
+    {
+        <form method="POST" action="/Customer/ToKorzina">
+        <table class="table-bordered table-hover table-striped table">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Product name</td>
+                    <td>Product price</td>
+                    <td>Product category</td>
+                    <td>Count</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (products.Count > 0)
+                { 
+                    foreach(var item in products)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.ProductName</td>
+                            <td>@item.ProductPrice</td>
+                            <td>@categories.Where(p=>p.Id == item.CategoryId).Select(p=>p.CategoryName).FirstOrDefault()</td>
+                            <td><input type="number" value="0" name="productes"></td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr class="text-center">
+                        <td colspan="4">Empty</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    <input type="submit" value="to korz">
+    </form>
+    <form action="/Customer/Index" method="post">
+            <div class="row input-group col-md-4 ">
+                <label for="CategoryId">Category: </label>
+                <select class="form-control" style="position:relative;left:20px;" id="CategoryId" name="CategoryId">
+                    @foreach (var item in categories)
+                    {
+                        <option value="@item.Id">@item.CategoryName</option>
+                    }
+                    <option value="All">Show all</option>
+                </select>
+            </div>
+            <br />
+            <input class="row input-group col-md-2 btn btn-primary" type="submit"  value="Show"/>
+        </form>
+    }
+    <h1>@ViewBag.Adress</h1>
+}

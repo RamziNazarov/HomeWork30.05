@@ -56,7 +56,7 @@ namespace HomeWork25._05
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Product}/{action=Index}/{id?}");
+                    pattern: "{controller=Vkhod}/{action=Vkhod}/{id?}");
             });
         }
     }

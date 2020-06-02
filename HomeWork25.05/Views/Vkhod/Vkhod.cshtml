@@ -1,0 +1,26 @@
+@{
+    List<Role> roles = ViewBag.Roles;
+<form action="/Vkhod/Vkhod" method="POST">
+    <div class="row input-group col-md-4">
+        <label for="Login">Login :</label>
+        <input style="position: relative; left: 20px;" class="from-control" type="text" name="Login" id="Login">
+    </div>
+    <br/>
+    <div class="row input-group col-md-4">
+        <label for="Password">Paswword :</label>
+        <input style="position: relative; left: 20px;" class="from-control" type="text" name="Password" id="Password">
+    </div>
+    <br/>
+    <div class="row input-group col-md-4">
+        <label for="Roles"></label>
+        <select class="form-control" style="position: relative; left: 20px;" name="Role" id="Roles">
+            @foreach (var item in roles)
+            {
+                <option value="@item.Id">@item.RoleName</option>
+            }
+        </select>
+    </div>
+    <br/>
+    <input class="row input-group col-md-2 btn btn-primary" type="submit" value="Sing In" >
+</form>
+}
