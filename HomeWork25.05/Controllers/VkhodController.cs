@@ -24,7 +24,7 @@ namespace HomeWork25._05
                 return BadRequest(ModelState);
             var cust = context.Customers.Where(p=> p.RoleId == int.Parse(Role) && p.Login == Login && p.Password == Password).Select(p=>p).FirstOrDefault();
             if(cust != null && Role == "1")
-                return RedirectToAction("Index","Product");
+                return RedirectToAction("Index","Product",new {Id = cust.Id});
             if(cust != null && Role == "2")
                 return RedirectToAction($"Index","Customer",new {Id = cust.Id});
             return BadRequest();

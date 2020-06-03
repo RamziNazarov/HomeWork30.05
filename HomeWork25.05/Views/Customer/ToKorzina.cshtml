@@ -1,4 +1,37 @@
 @{
-List<int> list = ViewBag.Productes;
-<h1>@list[0]</h1>
+    List<int> productes = ViewBag.productes;
+    List<Product> productId = ViewBag.productId;
+    <table>
+        <thead>
+            <tr>
+                <td>Product name</td>
+                <td>Product price</td>
+                <td>Count</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{int a = 0;}
+            @foreach (var item in productId)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.ProductPrice</td>
+                    <td>@productes[a]</td>
+                </tr>
+                a++;
+            }
+        </tbody>
+    </table>
+    double summ = 0;
+    a = 0;
+    foreach (var item in productId)
+    {
+        summ += item.ProductPrice * productes[a];
+        a++;
+    }
+    <form method="POST" action="/Customer/ToKorzina">
+        <label for="totalPrice">Total price</label>
+        <input type="number" id = "totalPrice" name = "totalPrice" readonly="true" value="@summ">
+        <input type="submit" value="Pereyti k oplate">
+    </form>
 }

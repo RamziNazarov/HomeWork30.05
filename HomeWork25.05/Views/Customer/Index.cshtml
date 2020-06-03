@@ -3,7 +3,7 @@
     List<Product> products = ViewBag.Products;
     @if(products != null && categories != null)
     {
-        <form method="POST" action="/Customer/ToKorzina">
+        <form method="GET" action="/Customer/ToKorzina">
         <table class="table-bordered table-hover table-striped table">
             <thead>
                 <tr>
@@ -20,7 +20,7 @@
                     foreach(var item in products)
                     {
                         <tr>
-                            <td>@item.Id</td>
+                            <td><input name="productId" type="number" readonly="true" value="@item.Id"></td>
                             <td>@item.ProductName</td>
                             <td>@item.ProductPrice</td>
                             <td>@categories.Where(p=>p.Id == item.CategoryId).Select(p=>p.CategoryName).FirstOrDefault()</td>

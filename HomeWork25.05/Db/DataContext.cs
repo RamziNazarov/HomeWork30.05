@@ -20,6 +20,7 @@ namespace HomeWork25._05.DB
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers {get;set;}
         public DbSet<Role> Roles {get;set;}
+	public DbSet<Pokupka> Pokupki {get;set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
