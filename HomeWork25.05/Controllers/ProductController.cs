@@ -29,7 +29,7 @@ namespace HomeWork25._05.Controllers
             ViewBag.Categories = categories.ReadCategories();
             if(customer == null)
             {
-            customer = _context.Customers.Find(Id);
+                customer = _context.Customers.Find(Id);
             }
             ViewBag.Customer = customer;
             return View();

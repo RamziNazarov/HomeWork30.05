@@ -1,13 +1,14 @@
 @{
-    @* Customer customer = ViewBag.Customer;
-    //double price = ViewBag.Price;
+    Customer customer = ViewBag.Customer;
+    double price = ViewBag.Price;
     string adres = customer.Adress??"";
-    string phone = (string.IsNullOrEmpty(customer.PhoneNumber.ToString()))?"":customer.PhoneNumber.ToString(); *@
+    string phone = (string.IsNullOrEmpty(customer.PhoneNumber.ToString()))?"":customer.PhoneNumber.ToString();
     <form action="/Customer/OknoOplati" method="POST">
-        @* <input type="text" value="@adres">
-        <input type="text" value="@phone"> *@
-        <input type="date" name="date" id="">
-        <input type="submit" name="" id="" value="Oplatit">
+        <input type="number" readonly="true" name="totalPrice" value="@price">
+        <input type="text" value="@adres" name="adres">
+        <input type="text" value="@phone" name="phone">
+        <input type="date" name="date">
+        <input type="submit" value="Oplatit">
     </form>
     if(ViewBag.date != null)
     {

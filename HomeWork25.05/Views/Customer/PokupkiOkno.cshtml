@@ -1,0 +1,26 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Price</td>
+            <td>Date</td>
+            <td>Ardess</td>
+            <td>Phone</td>
+        </tr>
+    </thead>
+    <tbody>
+        @if(ViewBag.Pokupki != null && ViewBag.Pokupki.Count > 0)
+        {
+            foreach (var item in ViewBag.Pokupki)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Price</td>
+                    <td>@item.Date.ToString().Substring(0,10)</td>
+                    <td>@item.Adress</td>
+                    <td>@item.Phone</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

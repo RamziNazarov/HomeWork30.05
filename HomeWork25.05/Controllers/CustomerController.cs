@@ -10,6 +10,7 @@ namespace HomeWork25._05
     public class CustomerController : Controller
     {
         DataContext context {get;}
+
         static Customer customer;
         public CustomerController(DataContext _context)
         {
@@ -20,6 +21,7 @@ namespace HomeWork25._05
         {
             ViewBag.Categories = context.Categories.ToList();
             ViewBag.Products = context.Products.ToList();
+            if(customer == null)
             customer = context.Customers.Find(Id);
             ViewBag.Customer = customer;
             return View();
@@ -27,6 +29,7 @@ namespace HomeWork25._05
         [HttpPost]
         public IActionResult Index(string CategoryId)
         {
+            ViewBag.Customer = customer;
             ViewBag.Categories = context.Categories.ToList();
             if(CategoryId == "All")
                 ViewBag.Products = context.Products.ToList();
@@ -37,6 +40,7 @@ namespace HomeWork25._05
         [HttpGet]
         public IActionResult ToKorzina(int[] productes,int[] productId)
         {
+            ViewBag.Customer = customer;
             List<int> producs = new List<int>();
             List<Product> prod = new List<Product>(); 
             for(int i = 0; i < productes.Length;i++)
@@ -64,9 +68,19 @@ namespace HomeWork25._05
             return View();
         }
         [HttpPost]
-        public IActionResult OknoOplati(string date)
+        public IActionResult OknoOplati(string date,double totalPrice,string adres, string phone)
         {
+            ViewBag.Customer = customer;
             ViewBag.date = date;
+            context.Pokupki.Add(new Pokupka(){Date = Convert.ToDateTime(date),Price = totalPrice,CustomerId = customer.Id,Adress = adres,Phone = phone});
+            context.SaveChanges();
+            return RedirectToAction("PokupkiOkno");
+        }
+        [HttpGet]
+        public IActionResult PokupkiOkno()
+        {
+            ViewBag.Customer = customer;
+            ViewBag.Pokupki = context.Pokupki.ToList();
             return View();
         }
     }

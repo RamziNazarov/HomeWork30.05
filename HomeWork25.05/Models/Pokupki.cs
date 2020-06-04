@@ -13,6 +13,8 @@ namespace HomeWork25._05
         public double Price { get; set; }
         [Required]
         public DateTime Date {get;set;}
+        public string Adress {get;set;}
+        public string Phone {get;set;}
 
         public virtual Customer Customers {get;set;}
     }
